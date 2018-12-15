@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   devise_for :doctors
   root 'home#index'
-  resources :doctors, only: [:show, :edit, :update]
+  resources :doctors, only: [:show, :edit, :update] do
+    get 'create_patient', on: :member
+    post 'create_patient', on: :member    
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

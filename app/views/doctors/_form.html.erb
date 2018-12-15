@@ -26,6 +26,11 @@
     <%= form.text_field :l_name, id: :doctor_l_name %>
   </div>
 
+  <div class="field">
+    <%= form.label :avatar, "Select Profile Image" %>
+    <%= form.file_field :avatar %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

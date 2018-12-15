@@ -1,6 +1,6 @@
 class DoctorsController < ApplicationController
   before_action :authenticate_doctor!
-  before_action :set_doctor, only: [:show, :edit, :update]
+  before_action :set_doctor, only: [:show, :edit, :update, :create_patient]
 
   # GET /doctors/1
   # GET /doctors/1.json
@@ -25,6 +25,10 @@ class DoctorsController < ApplicationController
     end
   end
 
+  def create_patient
+    @patient = @doctor.patients.new   
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_doctor
@@ -33,6 +37,6 @@ class DoctorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def doctor_params
-      params.require(:doctor).permit(:email, :f_name, :l_name)
+      params.require(:doctor).permit(:email, :f_name, :l_name, :avatar, :patients_attributes => [:id, :f_name, :l_name, :disease])
     end
 end

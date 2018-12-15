@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<%= link_to "Create Patient", create_patient_doctor_path(@doctor) %>  
 <p>
   <strong>Email:</strong>
   <%= @doctor.email %>
@@ -14,5 +14,9 @@
   <strong>L name:</strong>
   <%= @doctor.l_name %>
 </p>
+<% if @doctor.avatar.exists? %>
+  <%= image_tag @doctor.avatar.url(:medium) %>
+<% end %>
 
+<br>
 <%= link_to 'Edit', edit_doctor_path(@doctor) %>
