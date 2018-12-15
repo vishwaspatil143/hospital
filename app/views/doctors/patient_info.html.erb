@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+<h1>Patient Info</h1>
+<table class="table table-striped">
+  <tbody>
+    <tr>
+      <th scope="col">Email</th>
+      <td><%= @patient.email %></td>
+    </tr>
+    <tr>
+      <th scope="col">First Name</th>
+      <td><%= @patient.f_name %></td>
+    </tr>
+    <tr>
+      <th scope="col">Last Name</th>
+      <td><%= @patient.l_name %></td>
+    </tr>
+    <tr>
+      <th scope="col">Disease</th>
+      <td>
+        <%= @patient.disease %>
+      </td>
+    </tr>
+  <tbody>
+</table>
+<%= link_to "Book Appointment", book_appintment_doctor_path(id: @doctor, patient_id: @patient.id) %>
+
+<h1>Appointments</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Start date</th>
+      <th scope="col"> start time</th>
+      <th scope="col">end time</th>
+      <th scope="col">doctor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @appointments.each do |appointment| %>
+      <tr>
+        <th><%= appointment.start_date %> </th>
+        <td><%= appointment.start_time %></td>
+        <td><%= appointment.end_time %></td>
+        <td><%= appointment.doctor.f_name %></td>        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
