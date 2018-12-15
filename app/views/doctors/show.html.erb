@@ -53,7 +53,7 @@
         <td><%= patient.l_name %></td>
         <td><%= patient.email %></td>
         <td><%= patient.disease %></td>
-        <td><%= link_to '<span class="glyphicon glyphicon-eye-open"></span>'.html_safe, patient_info_doctor_path(id: @doctor, patient_id: patient) %></td>
+        <td><%= link_to 'show', patient_info_doctor_path(id: @doctor, patient_id: patient.id) %></td>
       </tr>
     <% end %>
   </tbody>

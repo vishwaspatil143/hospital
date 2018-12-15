@@ -7,6 +7,7 @@ class Doctor < ApplicationRecord
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
   has_many :doctor_patients
   has_many :patients, through: :doctor_patients
-  accepts_nested_attributes_for :patients  
+  has_many :appointments, dependent: :destroy
+  accepts_nested_attributes_for :patients
 
 end
