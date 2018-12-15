@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   devise_for :doctors
   root 'home#index'
   resources :doctors, only: [:show, :edit, :update] do
