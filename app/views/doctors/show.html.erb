@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-<%= link_to "Create Patient", create_patient_doctor_path(@doctor) %>  
+<%= link_to "Create Patient", create_patient_doctor_path(@doctor) %>
 <p>
   <strong>Email:</strong>
   <%= @doctor.email %>
@@ -16,6 +16,15 @@
 </p>
 <% if @doctor.avatar.exists? %>
   <%= image_tag @doctor.avatar.url(:medium) %>
+<% end %>
+
+<h2>Patient Info</h2>
+<% @patients.each do |patient| %>
+  Email <%= patient.email %>
+  First Name: <%= patient.f_name %>
+  Last Name: <%= patient.l_name %>
+  Disease: <%= patient.disease %>
+  <br>
 <% end %>
 
 <br>

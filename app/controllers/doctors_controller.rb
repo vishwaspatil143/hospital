@@ -5,6 +5,7 @@ class DoctorsController < ApplicationController
   # GET /doctors/1
   # GET /doctors/1.json
   def show
+    @patients = @doctor.patients
   end
 
   # GET /doctors/1/edit
@@ -26,7 +27,21 @@ class DoctorsController < ApplicationController
   end
 
   def create_patient
-    @patient = @doctor.patients.new   
+    if request.get?
+    else
+      respond_to do |format|
+        if @doctor.save(doctor_params)
+          format.html { redirect_to create_patient_doctor_path(@doctor), notice: 'patient is successfully created.' }
+          format.json { render :create_patient, status: :ok, location: @doctor }
+        else
+          format.html { render :create_patient }
+          format.json { render json: @doctor.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  end
+
+  def patient_info
   end
 
   private
@@ -37,6 +52,6 @@ class DoctorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def doctor_params
-      params.require(:doctor).permit(:email, :f_name, :l_name, :avatar, :patients_attributes => [:id, :f_name, :l_name, :disease])
+      params.require(:doctor).permit(:email, :f_name, :l_name, :avatar, :patients_attributes => [:id, :email, :f_name, :l_name, :disease])
     end
 end

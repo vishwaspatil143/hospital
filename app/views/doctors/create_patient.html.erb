@@ -1,35 +1,35 @@
-<%= form_for @patient, method: :post, url: "create_patient_doctor_path" do |form| %>
+<%= form_for @doctor, method: :post, url: create_patient_doctor_path do |form| %>
 
-  <% if @patient.errors.any? %>
+  <% if @doctor.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@patient.errors.count, "error") %> prohibited this doctor from being saved:</h2>
+      <h2><%= pluralize(@doctor.errors.count, "error") %> prohibited this doctor from being saved:</h2>
 
       <ul>
-      <% @patient.errors.full_messages.each do |message| %>
+      <% @doctor.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-
-  <div class="field">
-    <%= form.label :email, "Email" %>
-    <%= form.text_field :email %>
-  </div>
-  <div class="field">
-    <%= form.label :f_name, "First Name" %>
-    <%= form.text_field :f_name %>
-  </div>
-  <div class="field">
-    <%= form.label :l_name, "Last Name" %>
-    <%= form.text_field :l_name %>
-  </div>
-  <div class="field">
-    <%= form.label :disease %>
-    <%= form.text_field :disease %>
-  </div>
-
+  <%= form.fields_for :patients, @doctor.patients.new do |pat| %>
+    <div class="field">
+      <%= pat.label :email, "Email" %>
+      <%= pat.text_field :email %>
+    </div>
+    <div class="field">
+      <%= pat.label :f_name, "First Name" %>
+      <%= pat.text_field :f_name %>
+    </div>
+    <div class="field">
+      <%= pat.label :l_name, "Last Name" %>
+      <%= pat.text_field :l_name %>
+    </div>
+    <div class="field">
+      <%= pat.label :disease %>
+      <%= pat.text_field :disease %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit "Create Patient" %>
